@@ -6,10 +6,11 @@ A modern, feature-rich collaborative whiteboard application that enables multipl
 
 ## 📺 Demo
 
-<video src="./assets/demo.mp4" width="800" controls>
-  Your browser does not support the video tag.
-</video>
-
+<div align="center">
+  <video src="https://github.com/Rajiv-0920/Whiteboard/blob/main/assets/demo.mp4" width="800" controls>
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 **Live Demo:** [View live url](https://whiteboard-n8c7.onrender.com)
 
