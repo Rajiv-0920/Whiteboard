@@ -7,7 +7,7 @@ A modern, feature-rich collaborative whiteboard application that enables multipl
 ## 📺 Demo
 
 <div align="center">
-  <video src="https://github.com/Rajiv-0920/Whiteboard/blob/main/assets/demo.mp4" width="800" controls>
+  <video src="./assets/demo.mp4" width="800" controls>
     Your browser does not support the video tag.
   </video>
 </div>
