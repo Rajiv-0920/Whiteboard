@@ -6,7 +6,7 @@
   "scripts": {
     "setup": "npm install && npm install --prefix client && npm install --prefix server",
     "build": "npm run build --prefix client",
-    "start": "node index.js"
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",
