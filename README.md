@@ -2,7 +2,7 @@
 
 A modern, feature-rich collaborative whiteboard application that enables multiple users to draw, sketch, and create together in real-time. Built with the MERN stack and Socket.io for seamless real-time synchronization.
 
-![Whiteboard Demo](./assets/demo.png)
+![Whiteboard Demo](https://github.com/user-attachments/assets/0c810a3b-43f4-4827-8156-ef0459c31a51)
 
 ## 📺 Demo
 
