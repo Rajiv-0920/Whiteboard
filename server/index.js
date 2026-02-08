@@ -3,10 +3,12 @@ import cors from 'cors'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import 'dotenv/config'
+import path from 'path'
 
 const app = express()
 const PORT = process.env.PORT || 5000
 const server = createServer(app)
+const __dirname = path.resolve()
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173', // Use the exact port from your browser URL
