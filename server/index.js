@@ -4,11 +4,13 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import 'dotenv/config'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 const app = express()
 const PORT = process.env.PORT || 5000
 const server = createServer(app)
-const __dirname = path.resolve()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173', // Use the exact port from your browser URL
@@ -48,7 +50,7 @@ io.on('connection', (socket) => {
 })
 
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../client/dist')
+  const clientPath = path.resolve(__dirname, '..', 'client', 'dist')
   app.use(express.static(clientPath))
 
   app.get('/{*any}', (req, res) => {
