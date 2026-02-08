@@ -2,12 +2,17 @@ import express from 'express'
 import cors from 'cors'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
+import 'dotenv/config'
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
 const server = createServer(app)
 const io = new Server(server, {
-  cors: { origin: '*' },
+  cors: {
+    origin: 'http://localhost:5173', // Use the exact port from your browser URL
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
 })
 
 app.use(
@@ -20,10 +25,10 @@ app.use(
 let onlineUsers = new Set()
 
 io.on('connection', (socket) => {
-  console.log('💚 A user connected')
+  console.log('💚 A user connected:', socket.id)
   onlineUsers.add(socket.id)
   socket.on('cursorUpdate', (data) => {
-    socket.broadcast.emit('cursorUpdate', data)
+    socket.broadcast.emit('cursorUpdate', { ...data, id: socket.id })
   })
 
   socket.on('updateShapes', (data) => {
@@ -33,8 +38,10 @@ io.on('connection', (socket) => {
   io.emit('totalMembers', onlineUsers.size)
 
   socket.on('disconnect', () => {
-    console.log('💔 A user disconnected')
+    console.log('💔 A user disconnected:', socket.id)
     onlineUsers.delete(socket.id)
+    io.emit('totalMembers', onlineUsers.size)
+    socket.broadcast.emit('userDisconnected', socket.id)
   })
 })
 
@@ -47,10 +54,11 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+// Change this block
 const startServer = async () => {
   try {
-    app.listen(PORT, () => {
-      console.log(`Server is running on the port: ${PORT}`)
+    server.listen(PORT, () => {
+      console.log(`🚀 Real-time server running on: http://localhost:${PORT}`)
     })
   } catch (error) {
     console.log(`Error starting the server: ${error}`)
